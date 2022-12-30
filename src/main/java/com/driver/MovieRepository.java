@@ -33,19 +33,44 @@ public class MovieRepository {
     public ArrayList<String> getListFromDB(String name){
         return pairDB.get(name);
     }
-    public ArrayList<Movie> getallMoviesformDB(){
-        ArrayList<Movie> movies=new ArrayList<>();
+    public ArrayList<String> getallMoviesformDB(){
+        ArrayList<String> movies=new ArrayList<>();
         for(Movie m:movieDB.values())
-            movies.add(m);
+            movies.add(m.getName());
 
         return movies;
     }
-    public void deleteDirectorByNamefromDB(String name){
-        directorBD.remove(name);
+    public void deleteDirectorByNamefromDB(String director){
+        ArrayList<String> name=pairDB.get(director);
+        pairDB.remove(director);
+        directorBD.remove(director);
+        for(String n:name){
+            movieDB.remove(n);
+        }
     }
 
     public void deleteAllDirectorsfromBD(){
+        ArrayList<String> director=new ArrayList<>();
+        ArrayList<String> movie=new ArrayList<>();
+        for(String n:directorBD.keySet())
+            director.add(n);
         directorBD.clear();
+
+        for(String directorname:director){
+            if(pairDB.containsKey(directorname)){
+                for(String moviename:pairDB.get(directorname))
+                     movie.add(moviename);
+            }
+        }
+
+        directorBD.clear();
+        for(String name:movie){
+            if(movieDB.containsKey(name)){
+                movieDB.remove(name);
+            }
+        }
+
+
     }
 
 

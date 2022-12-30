@@ -32,11 +32,11 @@ public class MovieService {
     public ArrayList<String> getListFromService(String name){
         return repository.getListFromDB(name);
     }
-    public ArrayList<Movie>  getallMoviesformservice(){
+    public ArrayList<String>  getallMoviesformservice(){
         return repository.getallMoviesformDB();
     }
-    public void deleteDirectorByNameformservice(String name){
-       repository.deleteDirectorByNamefromDB(name);
+    public void deleteDirectorByNameformservice(String director){
+       repository.deleteDirectorByNamefromDB(director);
     }
 
     public void deleteAllDirectorsfromsevice(){
