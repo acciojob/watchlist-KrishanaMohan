@@ -4,12 +4,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class MovieRepository {
     HashMap<String,Movie> movieDB=new HashMap<>();
     HashMap<String,Director> directorBD=new HashMap<>();
-    HashMap<String, ArrayList<String>> pairDB=new HashMap<>();
+    HashMap<String, List<String>> pairDB=new HashMap<>();
     public void addMovieInDB(String name,Movie m){
         movieDB.put(name,m);
     }
@@ -30,7 +31,7 @@ public class MovieRepository {
         pairDB.get(d).add(m);
     }
 
-    public ArrayList<String> getListFromDB(String name){
+    public List<String> getListFromDB(String name){
         return pairDB.get(name);
     }
     public ArrayList<String> getallMoviesformDB(){
@@ -41,7 +42,7 @@ public class MovieRepository {
         return movies;
     }
     public void deleteDirectorByNamefromDB(String director){
-        ArrayList<String> name=pairDB.get(director);
+        List<String> name=pairDB.get(director);
         pairDB.remove(director);
         directorBD.remove(director);
         for(String n:name){
@@ -50,8 +51,8 @@ public class MovieRepository {
     }
 
     public void deleteAllDirectorsfromBD(){
-        ArrayList<String> director=new ArrayList<>();
-        ArrayList<String> movie=new ArrayList<>();
+        List<String> director=new ArrayList<>();
+        List<String> movie=new ArrayList<>();
         for(String n:directorBD.keySet())
             director.add(n);
         directorBD.clear();

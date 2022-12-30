@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 
@@ -19,14 +20,14 @@ public class MovieController {
     }
 
     @PostMapping("/add-director")
-    public ResponseEntity<String> addMovie(@RequestBody Director director){
+    public ResponseEntity<String> addDirector(@RequestBody Director director){
         String name=director.getName();
         service.addDirectorInService(name,director);
         return new ResponseEntity<>("New director added successfully",HttpStatus.CREATED);
     }
 
     @PutMapping("/add-movie-director-pair")
-    public ResponseEntity<String> addMovieDirectorPair(@RequestParam("director") String director ,@RequestParam("movie") String movie){
+    public ResponseEntity<String> addMovieDirectorPair(@RequestParam("movie") String movie,@RequestParam("director") String director){
 
         service.addinPair(director,movie);
         return new ResponseEntity<>("New movie-director pair added successfully",HttpStatus.CREATED);
@@ -47,13 +48,13 @@ public class MovieController {
 
 
     @GetMapping("/get-movies-by-director-name/{name}")
-    public  ResponseEntity<ArrayList<String>>  getMoviesByDirectorName(@PathVariable String name){
-        ArrayList<String> list= service.getListFromService(name);
+    public  ResponseEntity<List<String>>  getMoviesByDirectorName(@PathVariable String name){
+        List<String> list= service.getListFromService(name);
         return new ResponseEntity<>(list,HttpStatus.CREATED);
     }
     @GetMapping("/get-all-movies")
-    public  ResponseEntity<ArrayList<String>> findAllMovies(){
-        ArrayList<String> list= service.getallMoviesformservice();
+    public  ResponseEntity<List<String>> findAllMovies(){
+        List<String> list= service.getallMoviesformservice();
         return new ResponseEntity<>(list,HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-director-by-name")

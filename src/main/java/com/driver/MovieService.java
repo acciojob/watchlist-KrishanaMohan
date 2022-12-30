@@ -2,6 +2,7 @@ package com.driver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -29,10 +30,10 @@ public class MovieService {
     public void addinPair(String director,String name){
         repository.addPair(director,name);
     }
-    public ArrayList<String> getListFromService(String name){
+    public List<String> getListFromService(String name){
         return repository.getListFromDB(name);
     }
-    public ArrayList<String>  getallMoviesformservice(){
+    public List<String>  getallMoviesformservice(){
         return repository.getallMoviesformDB();
     }
     public void deleteDirectorByNameformservice(String director){
